@@ -2,17 +2,19 @@ import React,{useState,useEffect} from 'react'
 import { FaRegBookmark } from "react-icons/fa6";
 import { CiShare1 } from "react-icons/ci";
 import { useSelector,useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import {addToCart} from "../../../slices/cartSlice";
 import { ACCOUNT_TYPE } from '../../../utils/constants';
 import { buycourse } from '../../../services/operations/studentsFeatures';
 import { useParams } from 'react-router-dom';
+import copy from 'copy-to-clipboard';
 export default function CourseDetailsCard({data,modal,setmodal}) {
     const {user} = useSelector((state)=>state.profile);
     const {cartlist} = useSelector(state=>state.cart);
     const {token} = useSelector((state)=>state.auth);
     const dispatch = useDispatch();
+    const loc = useLocation();
     const navigate = useNavigate();
     const {id} = useParams();
     useEffect(()=>{
@@ -42,6 +44,8 @@ export default function CourseDetailsCard({data,modal,setmodal}) {
           }
     }
     function handleshare(){
+      console.log("during sharing text is:",loc);
+      copy(window.location.href);
         toast.success("Link copied to clipboard");
     }
     function handlebuycourse(){
@@ -82,11 +86,11 @@ export default function CourseDetailsCard({data,modal,setmodal}) {
         data?.Instructions.map((d,index)=>(<li className='text-caribeangreen-800' key ={index}>{d}</li>))
       }
       </ul>
-      <div 
-      onClick = {handleshare}
+      <button
+      onClick = {()=>handleshare}
       className='text-yellow-200 text-center items-center justify-center flex items-center flex-row'>
         <span className='mx-1'><CiShare1 /></span>
-        <span>Share</span></div>
+        <span>Share</span></button>
 
     </div>
   )

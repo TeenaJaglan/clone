@@ -30,7 +30,7 @@ useEffect(()=>{
 },[])
   return (
    
-      <div className=' mx-[2rem] my-[50px] h-[184px] max-w-maxContentTab lg:max-w-maxContent flex-row  '>
+      <div className='   mx-[2rem] mx-auto w-full my-[50px] h-[184px] max-w-maxContentTab lg:max-w-maxContent flex-row  '>
 <Swiper
 className="mySwiper w-full"
 slidesPerView={3} spaceBetween={25} loop={true}
