@@ -28,7 +28,7 @@ app.use(
 app.use(cookieparser());
 app.use(cors({
     // origin:"http://localhost:3000" ,
-    origin: 'https://studynotionclone-teenas-projects-ab872839.vercel.app/',
+    origin: 'https://studynotionclone-teenas-projects-ab872839.vercel.app',
     //means ye url humari frontend ka h jise entertain karna h most imp.
     Credentials:true
 })); //eq:frontend-3000 port ,backend-4000 port if we want our backend to entertain our frontend requests then we need cors();
