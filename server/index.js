@@ -12,12 +12,7 @@ const CloudinaryConnection = require("./config/cloudinary");
 const dbconnection = require("./config/database");
 const fileUpload = require("express-fileupload")
 const  port = process.env.PORT ||4000;
-//new addition for deployment
-// const path = require("path");
-// app.get("/",(req,res)=>{
-//     app.use(express.static(path.resolve(_dirname,"frontend","build")));
-//     app.sendFile(path.resolve(_dirname,"frontend","build","index.html"));
-// })
+
 //setup
 dbconnection();
 CloudinaryConnection();
@@ -32,7 +27,8 @@ app.use(
 )
 app.use(cookieparser());
 app.use(cors({
-    origin:"http://localhost:3000" ,
+    // origin:"http://localhost:3000" ,
+    origin: 'https://studynotionedtechplatfrom-hafgtdotm-teenas-projects-ab872839.vercel.app',
     //means ye url humari frontend ka h jise entertain karna h most imp.
     Credentials:true
 })); //eq:frontend-3000 port ,backend-4000 port if we want our backend to entertain our frontend requests then we need cors();
