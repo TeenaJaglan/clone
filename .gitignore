@@ -12,7 +12,7 @@ node_modules
 # production
 # /build
 build/
-/build
+
 # misc
 .env
 .env.*
@@ -33,5 +33,5 @@ pnpm-lock.yaml
 .vscode
 .editorconfig
 .nvmrc
-package-lock.json
-package.json
+# package-lock.json
+# package.json
