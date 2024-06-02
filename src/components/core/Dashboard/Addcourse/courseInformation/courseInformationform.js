@@ -211,10 +211,9 @@ export default function CourseInformationform() {
             className="bg-richblack-800 h-[3rem] px-2 w-full  border-b-[1px] border-white rounded-[10px] "
             name="courseCategory" 
             {...register("courseCategory", { required: true })}
+            placeholder = "Choose Any Category"
           >
-            <option className="h-[3rem] rounded-0 text-richblack-200">
-              Choose any category
-            </option>
+            
             {categoryoption.map((item, index) => (
               <option
                 key={index}
