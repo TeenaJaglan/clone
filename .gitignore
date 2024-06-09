@@ -14,7 +14,7 @@ node_modules
 build/
 
 # misc
- .env
+.env
 .env.*
 /server/.env
 
@@ -34,5 +34,3 @@ pnpm-lock.yaml
 .vscode
 .editorconfig
 .nvmrc
-# package-lock.json
-# package.json
