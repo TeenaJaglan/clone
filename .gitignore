@@ -14,10 +14,8 @@ node_modules
 build/
 
 # misc
+
 # .env
-# .env.*
-# /server/.env
-.env
 .env.*
 /server/.env
 local.env
