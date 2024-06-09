@@ -14,9 +14,9 @@ node_modules
 build/
 
 # misc
-.env
+# .env
 .env.*
-/server/.env
+# /server/.env
 
 local.env
 .DS_Store
