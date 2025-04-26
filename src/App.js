@@ -48,7 +48,7 @@ function App() {
   return (
     <div className='font-family-inter flex flex-col bg-richblack-900 mx-auto object-contain w-full h-full '>
       <Navbar/>
-<Routes>
+      <Routes>
         <Route path="/" element = {<Home/>}/>
         <Route path="/SignUp" element = {<OpenRoute><SignUp/></OpenRoute>}/>
         <Route path="/Login" element = {<OpenRoute><Login/></OpenRoute>}/>
