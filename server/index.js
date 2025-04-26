@@ -58,7 +58,7 @@ app.use("/api/v1/reach", contactRoutes);
 app.get("/",(req,res)=>{
     res.setHeader("Access-Control-Allow-Origin", req.headers.origin || "*");
   return res.json({
-    message: "CORS check",
+    message: `CORS check ${req.headers.origin} hi`,
     origin: req.headers.origin
   });
    // return res.json({message:"Welcome to the StudyNotion Backend frame."});  
