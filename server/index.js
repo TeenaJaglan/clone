@@ -25,7 +25,7 @@ app.use(
 		tempFileDir:"/tmp",
 	})
 )
-// app.use(cookieparser());
+ app.use(cookieparser());
 // app.use(cors({
 //      origin:"http://localhost:3000" ,
 //    // origin: 'https://studynotionclone-teenas-projects-ab872839.vercel.app',
@@ -58,7 +58,7 @@ app.use("/api/v1/reach", contactRoutes);
 app.get("/",(req,res)=>{
     res.setHeader("Access-Control-Allow-Origin", req.headers.origin || "*");
   return res.json({
-    message: `CORS check ${req.headers.origin} hi`,
+    message: `CORS check ${req.headers.origin} ${req.headers.origin} hi`,
     origin: req.headers.origin
   });
    // return res.json({message:"Welcome to the StudyNotion Backend frame."});  
