@@ -9,24 +9,69 @@ export default function Updateprofile() {
   const [data,setdata] = useState({
     firstname:profile.firstname?profile.firstname:"",
     lastname:profile.lastname?profile.lastname:"",
-    gender:profile.gender?profile.gender:"",
+    gender:profile.gender?profile.gender:"Male",
     About:profile.About?profile.About:"",
-     contactNumber:profile.contactNumber?profile.contactNumber:"" ,
-     Dob:profile.Dob?profile.Dob:""
+    contactNumber:profile.contactNumber?profile.contactNumber:"" ,
+   Dob:profile.Dob?profile.Dob: "",
+ 
   });
+ 
   const temp = {...profile};
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    if (profile) {
+      setdata({
+        firstname: profile.firstname || "",
+        lastname: profile.lastname || "",
+        gender: profile.gender || "Male",
+        About: profile.About || "",
+        contactNumber: profile.contactNumber || "",
+        Dob: formatDate(profile.Dob) || "",
+      });
+    }
+  }, [profile]);
+  
   const genderdata = ["Male","Female","Choose not to say","Other"];
   function handleonChange(e){
     setdata((prev)=>({...prev,[e.target.name]:e.target.value}));
-    
   }
   function handleonSubmit(){
+    console.log("data is:");
+    console.log(data);
     dispatch(profileupdation(data,token,navigate));
    
   }
-
+  function formatDate(dob) {
+    if (!dob) return "";
+  
+    if (dob instanceof Date) {
+      // It's a Date object, convert to string
+      const year = dob.getFullYear();
+      const month = String(dob.getMonth() + 1).padStart(2, "0");
+      const day = String(dob.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+  
+    if (typeof dob === "string") {
+      if (dob.includes("-")) {
+        const parts = dob.split("-");
+        // Handle yyyy-mm-dd and dd-mm-yyyy separately
+        if (parts[0].length === 4) {
+          // Already yyyy-mm-dd
+          return dob;
+        } else if (parts[2].length === 4) {
+          // dd-mm-yyyy => yyyy-mm-dd
+          return `${parts[2]}-${parts[1]}-${parts[0]}`;
+        }
+      }
+    }
+  
+    return "";
+  }
+  
+  
   function cancelupdation(){
    
     setdata(temp);
@@ -73,21 +118,22 @@ export default function Updateprofile() {
                 name= "Dob"
                 value = {data.Dob}
                 placeholder = "Enter Your date of birth"
-                onChange = {handleonChange}/>
+                onChange = {handleonChange}
+               />
               </div>
               <div className="flex flex-col w-full ">
                 <label htmlFor="gender " className="text-white">
                   Gender
                 </label>
                 <div >
-                <select className="bg-richblack-600 h-[2rem] w-full  px-2 py-4 text-white border-b-[1px] border-white rounded-[5px]"
+                <select className="bg-richblack-600 h-[2rem] w-full  px-2 py-4  text-white border-b-[1px] border-white rounded-[5px]"
                 name = "gender" 
                 value = {data.gender}
                 
                 onChange = {handleonChange}>
                   {
                     genderdata.map((val,index)=>(
-                      <option key = {index} className="text-richblack-100">{val}</option>
+                      <option key = {index} value={val} className="text-richblack-100">{val}</option>
                     ))
                   }
                 </select>

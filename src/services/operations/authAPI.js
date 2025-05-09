@@ -61,13 +61,13 @@ export function signUp(signUpData,otps,navigate){
                 lastname,
                 emailaddress,
                 password,
-                confirmpassword} = signupData.signUpData;
+                confirmpassword,accountType} = signupData.signUpData;
                 console.log("the data to be send is "+ firstname,
                     lastname,
                     emailaddress,
                     password,
                     confirmpassword,
-                    otps);
+                    otps,accountType);
             const response = await apiconnector("POST",signup_api,{ 
                 
                 firstname,
@@ -75,7 +75,7 @@ export function signUp(signUpData,otps,navigate){
                 email:emailaddress,
                 password,
                 confirmpassword,
-                accountType:"Student",
+                accountType,
                 otp:otps,});
 
                 console.log(JSON.stringify(response));

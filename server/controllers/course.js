@@ -259,6 +259,7 @@ exports.getFullCourseDetails = async (req, res) => {
 
     const response = await course
       .findById({ _id: courseId })
+      .populate("Instructor")
       .populate("category")
       .populate("ratings_and_reviews")
       .populate({
@@ -325,7 +326,11 @@ exports.getInstructorDetails = async (req, res) => {
     console.log("Instructor id", instructorId, typeof instructorId);
     const allcourses = await course
       .find({ Instructor: instructorId })
-      .sort({ createdAt: -1 }).populate("courseContent");
+      .sort({ createdAt: -1 }).populate({
+        path:"courseContent",
+      populate:{
+        path:"subsection"
+      }});
     console.log("allcourses", allcourses);
     const other = await userschema
       .findById({ _id: instructorId })

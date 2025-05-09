@@ -13,7 +13,7 @@ const profileSchema= mongoose.Schema({
     
     },
     Dob:{
-        type:Date,
+        type:String,
     },
     contactNumber:{
         type:Number,

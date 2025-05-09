@@ -19,22 +19,23 @@ import { setmycourse,seteditcourse ,setstep} from '../../../../slices/courseSlic
     const [course,setcourse] = useState([]);
     const navigate = useNavigate();
     const {token} = useSelector(state=> state.auth)
-  async   function  getMyCourses(){
-    try{
-        const api = courses.GETMYCOURSE ;
-       
- const res = await apiconnector("GET",api,null,{Authorization:`Bearer ${token}`});
- console.log("the response from connector is");
- console.log(res.data.data);
-setcourse(res.data.data);
-    }
-    catch(err){
-        console.log("failed to fetch instructor  courses",err);
-        toast.error("failed to load courses os the instructor")
-    }
-    }
+     async function getAllCourses(){
+      try{
+  const api = courses.GETMYCOURSE ;
+   const res = await apiconnector("GET",api,null,{Authorization:`Bearer ${token}`});
+   console.log("the response from connector is");
+   console.log(res.data.data);
+   setcourse(res.data.data);
+   
+      }
+      catch(err){
+          console.log("failed to fetch instructor  courses",err);
+          toast.error("failed to load courses os the instructor")
+      }
+  }
     useEffect(()=>{
-        getMyCourses();
+       getAllCourses();
+       
     },[])
  async function deletecourse(_id){
      setmodal({
@@ -49,7 +50,8 @@ setcourse(res.data.data);
                   if(res?.data?.success){
                     toast.success("removed successfully");}
                     setmodal(null);
-                  getMyCourses();
+                //  getMyCourses();
+                getAllCourses();
                 } catch (err) {
                   console.log("failed to  delete courses", err);
                   toast.error("failed");

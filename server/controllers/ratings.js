@@ -8,7 +8,7 @@ exports.createRatings = async function(req,res){
     let {rating,suggestion,courseId} = req.body;
 let user = req.user.id;
 //validation
-console.log(rating,suggestion)
+console.log("rating fun starts",rating,suggestion)
 if(!rating || !suggestion){
     return res.json({
         success:false,

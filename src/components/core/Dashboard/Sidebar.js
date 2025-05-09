@@ -16,7 +16,7 @@ import { useState } from 'react';
     const {user} = useSelector(state=>state.profile);
 
    return (
-     <div className=" border-r-richblack-700 min-h-screen  bg-richblack-800 w-[200px] min-w-[200px] ">
+     <div className=" border-r-richblack-700 min-h-screen  bg-richblack-800 w-[19%] min-w-[200px] ">
      <div className='mt-5'>
             {
                 sidebarLinks.map((box,index)=>

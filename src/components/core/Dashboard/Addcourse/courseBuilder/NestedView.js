@@ -32,6 +32,7 @@ export default function NestedView({
   const [confirmationmodal,setconfirmationmodal] = useState(null);
   const [sectionId, setsectionId] = useState(null);
   const [modal, setmodal] = useState(null);
+  const [hide,sethide] = useState(false);
   useEffect(() => {
     console.log(",modal ia", modal);
     console.log("mycourse is", mycourse);
@@ -107,7 +108,7 @@ export default function NestedView({
             <div
               className=" flex flex-row justify-evenly items-center cursor-pointer" 
             >
-              <span ><IoMdArrowDropdown /></span>
+              <span  onClick={()=>sethide(!hide)}><IoMdArrowDropdown /></span>
               <span className="mx-2"><ImParagraphJustify /></span>
              <span>{item.section_name}</span> 
             </div>
@@ -124,13 +125,17 @@ export default function NestedView({
              <RiDeleteBin5Line />
             </button>
             <p className="h-full w-[1px] border-[1px] mx-1 border-richblack-50"></p>
-            <button className="mx-1"><IoMdArrowDropdown /></button>
+            <button className="mx-1" onClick={()=>sethide(!hide)}><IoMdArrowDropdown /></button>
             </div>
 
           </div>
           
 {/* //subsection part */}
+          {
+            hide && 
+          
           <div className="w-full justify-end flex flex-col">
+            
           {item.subsection.map((sub, index) => (
 
             <div className="cursor-pointer mx-3 w-11/12 py-2 b border-b-[1px] border-richblack-400 flex flex-row justify-between" key = {index}>
@@ -175,7 +180,7 @@ export default function NestedView({
   </button>
 </div>
           </div>
-  
+}
 
      
         </div>

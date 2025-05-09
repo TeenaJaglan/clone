@@ -25,6 +25,7 @@ export default function CourseDetailsCard({data,modal,setmodal}) {
     },[cartlist])
     function handleAddtocart(){
         if(!user){
+          console.log("modal set");
             setmodal({
                 text1: "You are not logged in!",
                 text2: "Please login to add To Cart",
@@ -33,14 +34,17 @@ export default function CourseDetailsCard({data,modal,setmodal}) {
                 btn1Handler: () => navigate("/login"),
                 btn2Handler: () => setmodal(null),
               })
+              return ;
         };
         if(user && user?.accountType === ACCOUNT_TYPE.INSTRUCTOR) {
             toast.error("You are an Instructor. You can't buy a course.")
             return;
           };
-          if(token){
-            dispatch(addToCart(data))
-            return;
+          if (token) {
+            dispatch(addToCart(data));
+          } else {
+            toast.error("Authentication token not found. Please log in again.");
+            navigate("/login");
           }
     }
     function handleshare(){
@@ -49,18 +53,24 @@ export default function CourseDetailsCard({data,modal,setmodal}) {
         toast.success("Link copied to clipboard");
     }
     function handlebuycourse(){
+      if(user && data?.students_enrolled.includes(user?._id)){
+        navigate("/dashboard/enrolled-courses");
+        return ;
+      }
       if(token){
-        
+        console.log("buy course enabled");
         buycourse(id,token,user,navigate,dispatch);
         return;
       }
       else{
+        console.log("add to cart enabled");
         handleAddtocart();
       }
     }
   return (
     <div className='rounded-[15px] w-6/12 sm:w-4/12 sm:absolute relative right-[1.5rem] top-[1.5rem]  bg-richblack-500 p-3'>
-      <img src = "https://wallpapercave.com/wp/FCDgjHU.jpg" 
+      <img src = {data?.thumbnail}
+      //src = "https://wallpapercave.com/wp/FCDgjHU.jpg" 
       // {data?.thumbnail}
        className='rounded-[15px]'/>
       <div className='text-xl text-white  flex justify-between'>
@@ -87,7 +97,7 @@ export default function CourseDetailsCard({data,modal,setmodal}) {
       }
       </ul>
       <button
-      onClick = {()=>handleshare}
+      onClick={() => handleshare()}
       className='text-yellow-200 text-center items-center justify-center flex items-center flex-row'>
         <span className='mx-1'><CiShare1 /></span>
         <span>Share</span></button>

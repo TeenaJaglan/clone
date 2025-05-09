@@ -13,7 +13,7 @@ export default function Coursecard({course}) {
       <img src = {course.thumbnail} className='w-[400px] h-[250px]'/>
       <p>{course.course_name}</p>
       <p>{course.course_description}</p>
-      <p>{course.Instructor.firstname} {course.Instructor.lastname}</p>
+      <p>{course.Instructor?.firstname} {course.Instructor?.lastname}</p>
      <RatingStars Review_Count={avgReviewCount} />
        <div className='flex flex-row '>
         <p className='text-richblack-500'>{course.ratings_and_reviews.length}</p>

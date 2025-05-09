@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import { GetCourseDetails } from '../services/operations/courseAPI';
-import FormDate from '../utils/formatDate';
+import {toStringDate} from '../utils/formatDate';
 import Averagerating from '../utils/Averagerating';
 import RatingStars from '../components/common/RatingStars';
 import { BiInfoCircle } from "react-icons/bi"
@@ -75,9 +75,9 @@ const response =0 ;
         <p className='text-richblack-100'>{coursedata.course_description}</p>
         <div className='flex font-bold items-center text-yellow-200'>{avgReviewCount}<span className='mx-2 my-1'><RatingStars Review_Count={avgReviewCount} /></span></div>
         <p className='my-1'>Students Enrolled :  {coursedata?.students_enrolled.length}</p>
-        <p className = "text-2xl"  >Created By {coursedata.Instructor.firstname} <span>{coursedata.Instructor.lastname}</span></p>
+        <p className = "text-2xl"  >Created By {coursedata?.Instructor?.firstname} <span>{coursedata.Instructor?.lastname}</span></p>
         <div className='my-1 flex items-center '>
-            <div className='flex items-center'><span className="mr-1"><BiInfoCircle /></span>Created at {FormDate(coursedata.createdAt)}</div>
+            <div className='flex items-center'><span className="mr-1"><BiInfoCircle /></span>Created at {toStringDate(coursedata.createdAt)}</div>
             <p className='flex items-center'><span className="mx-1"><HiOutlineGlobeAlt /> </span>{coursedata?.language}</p>
         </div>
     </div>

@@ -124,7 +124,9 @@ useEffect(()=>{
       </div>
       <div  className="text-black font-bold w-full my-4 flex justify-end">
         <button className="bg-yellow-100 rounded-[10px] p-3  mx-2 flex flex-row items-center" >
-        Save Changes
+        {
+          data?" Save ":" Create "
+        }
         </button>
         </div>
     </form>

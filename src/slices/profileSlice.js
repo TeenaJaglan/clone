@@ -17,9 +17,11 @@ const profileSlice = createSlice({
         },
         setProfile(state,value){
             state.profile = value.payload
+            localStorage.setItem("profile", JSON.stringify(value.payload));
         },
         setloading(state,value){
             state.loading = value.payload
+            localStorage.setItem("loading", JSON.stringify(value.payload));
         } ,
     }
 });

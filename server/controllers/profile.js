@@ -40,6 +40,14 @@ exports.updateprofile = async function (req, res) {
     }
 
     //now find profile and update
+    const date = new Date(Dob);
+    const month = String(date.getMonth()+1).padStart(2,'0');
+    const dates = String(date.getDate()).padStart(2,'0');
+    const year = date.getFullYear();
+    const time = `${year}-${month}-${dates}`;
+    
+    console.log("date:");
+    console.log(time);
     const updateprofile = await profile
       .findByIdAndUpdate(
         { _id: userid.additionalDetails._id },
@@ -50,7 +58,7 @@ exports.updateprofile = async function (req, res) {
           profession,
           gender,
           contactNumber,
-          
+          Dob:time
           //push remove kia h
         },
         { new: true }

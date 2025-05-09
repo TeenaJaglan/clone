@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 const InitialState ={
     step:1,
     editcourse:false,
-     mycourse:localStorage.getItem("mycourse")? JSON.parse(localStorage.getItem("mycourse")):{},
+    mycourse:localStorage.getItem("mycourse")? JSON.parse(localStorage.getItem("mycourse")):{},
     paymentLoading:false
 }
 

@@ -13,7 +13,9 @@ import { apiconnector } from "../../services/apiconnector";
 import Navbardropdown from "../core/HomePage/Navbardropdown";
 import Confirmationmodal from "./Confirmationmodal";
 import { IoIosMenu } from "react-icons/io";
+import { IoMdMore } from "react-icons/io";
 import NavbarLinkcol from "./NavbarLinks";
+
 export default function Navbar() {
   const Dashboardicon = Icons["VscDashboard"];
   const LogoutIcon = Icons["VscSignOut"];
@@ -26,7 +28,7 @@ export default function Navbar() {
   const [show,setshow] = useState(false);
   const [show2,setshow2] = useState(false);
   const [show3,setshow3] = useState(true);
-
+  const [show4,setshow4] = useState(false);
   const [confirmationmodal,setconfirmationmodal] = useState(null);
   const [sublinks, setsublinks] = useState([
   ]);
@@ -57,13 +59,15 @@ export default function Navbar() {
     fetchsublinks();
   },[token]);
   return (
-    <div className="mx-auto text-center relative w-full md:px-[5rem] px-[2rem] h-auto bg-richblack-900 border-b-[1px]  border-richblack-600 flex flex-row justify-between ">
-      <Link to="/" className="h-full my-2">
+    <div className="mx-auto text-center relative w-full md:px-[5rem] px-[2rem] h-auto bg-richblack-900 border-b-[1px]  border-richblack-600 flex flex-row justify-between items-center">
+      <Link to="/" className="h-full my-2 bg-red-500 flex items-center justify-center">
         <img src={logo} alt="Logo" />
       </Link>
       {/* home about us */}
-      <nav className="mx-2 text-center hidden md:block">
-        <ul className="flex flex-row items-center justify-center h-full w-auto text-center text-xl text-richblack-25">
+      {/* logo when the size changes to small */}
+     
+      <nav className={`mx-2 text-center hidden md:block`}>
+        <ul className={` flex flex-row items-center justify-center h-full w-auto text-center text-xl text-richblack-25`}>
           {NavbarLinks.map((links, index) => (
             <li key={index}>
               {/* what is the significance of this ? with path =>The difference between <Link to={links?.path}>{links.title}</Link> and <Link to={links.path}>{links.title}</Link> lies in how they handle potential null or undefined values in the links object.
@@ -97,7 +101,48 @@ In summary, using optional chaining (?.) helps prevent errors related to accessi
       </nav>
       {/* login/signup */}
       <div>
+        {/* three dots io */}
         <div className="flex flex-row mx-auto text-center h-full justify-between text-richblack-300 items-center">
+       
+        <nav className="mx-2 border-yellow-300 flex  md:hidden  text-center text-white bg-red-900 w-[20px] items-center">
+        <IoMdMore className={`${token==null ?"block":"hidden"}`}  onClick= {()=>setshow4(!show4)} />
+        </nav>
+          {
+            show4 && token==null &&  <div className="md:hidden">
+            <div className="absolute top-[2.8rem] right-[10rem]  h-[20px] w-[20px]   rotate-45  rounded bg-richblack-200">
+            </div>
+            <nav className={`mx-2 text-center absolute right-[7rem] top-[3.3rem] z-10 rounded-md w-auto bg-richblack-600 block`}>
+             <ul className={` flex flex-col items-center justify-center h-full w-auto text-center text-xl text-richblack-25`}>
+          {NavbarLinks.map((links, index) => (
+            <li key={index} className=" p-[0.1rem] my-[0.2rem]">
+              {links.title === "Catalog" ? (
+                
+                <div onClick = {()=>{setshow(false);setshow4(!show4)}} className="flex flex-row w-full relative group   w-auto cursor-pointer items-center justify-center">
+                  <p  onMouseEnter = {()=>{setshow(true)} }  >{links.title}</p>
+                  <p className="text-center mx-[5px]"><IoMdArrowDropdownCircle /></p>
+                  <Navbardropdown sublinks = {sublinks} show = {show}/>
+                </div>
+               
+              ) : (
+                <Link
+                  className={`${
+                    matchRoute(links?.path)
+                      ? "text-yellow-25 "
+                      : "text-richblack-25"
+                  } mx-[1rem] items-center flex p-[0.1rem] my-[0.2rem] `}
+                  to={links?.path}
+                  onClick = {()=>setshow4(!show4)}
+                >
+                  {links.title}
+                </Link>
+              )}
+            </li>
+          ))}
+          {/* if path matches then usse yellow karna h i.e, location.pathname  */}
+        </ul>
+      </nav>
+            </div>
+          }
           {token != null && (
             <div className="flex flex-row w-full items-center">
               {
@@ -157,12 +202,12 @@ In summary, using optional chaining (?.) helps prevent errors related to accessi
           {token == null && (
             <div className="flex flex-row items-center w-full h-full text-center  justify-between">
               <Link to="/login">
-                <button className="border-[1px] border-richblack-500 rounded-[5px] px-2 py-1 h-full mx-1">
+                <button className="border-[1px] border-richblack-500 rounded-[5px] px-2 py-1 h-full m-1">
                   Log In
                 </button>
               </Link>
               <Link to="/signup">
-                <button className="border-[1px] border-richblack-500 rounded-[5px] px-2 py-1 h-full mx-1">
+                <button className="border-[1px] border-richblack-500 rounded-[5px] px-2 py-1 h-full m-1">
                   Sign Up
                 </button>
               </Link>

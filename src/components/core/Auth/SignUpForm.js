@@ -13,12 +13,13 @@ import { useNavigate } from "react-router-dom";
 export default function SignUpForm() {
   const [showpassword, setshowpassword] = useState(false);
   const [showpassword2, setshowpassword2] = useState(false);
+  const [accountType, setaccountType] = useState("Student");
+
   const {signUpData} = useSelector((state)=>state.auth);
-  const [account,setaccount] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formdata, setformdata] = useState({
-    accountType:"",
+  
     firstname: "",
     lastname: "",
     emailaddress: "",
@@ -34,8 +35,10 @@ setformdata((prev)=>({...prev,[e.target.name]: e.target.value}));
    e.preventDefault();
     console.log(formdata);
    if(formdata.password!=formdata.confirmpassword) return toast.error("Passwords do not match");
-  // formdata.accountType = account?"Student":"Instructor";
-   const signupdata = {...formdata};
+
+   let signupdata = {...formdata,accountType};
+   console.log("before :");
+   console.log(signUpData);
    dispatch(setsignUpData(signupdata));
    console.log("signupdata is :");
    console.log(signUpData);
@@ -44,15 +47,19 @@ setformdata((prev)=>({...prev,[e.target.name]: e.target.value}));
   return (
     <form className="text-black flex mx-auto flex-col" >
       <div className="flex flex-row bg-richblack-800 border-b-[1px] border-white rounded-[25px] w-fit justify-evenly text-white my-4 font-bold ">
-        <label  onClick={(e) => {e.preventDefault();setaccount(true); 
-        formdata.accountType = "Student";}}
-        className={` p-4 ${account?"bg-richblack-700 rounded-[25px]":""}`}>
+        <label  onClick={(e) => {
+          e.preventDefault();
+          setaccountType("Instructor");
+        
+      }
+      }
+        className={` p-4 ${accountType=="Instructor"?"bg-richblack-700 rounded-[25px]":""}`}>
           <p>Instructor</p>
         </label>
         <label 
-             className={` p-4 ${!account?"bg-richblack-700 rounded-[25px]":""}`}
-        onClick={(e) => {e.preventDefault();setaccount(false);
-          formdata.accountType = "Instructor";
+             className={` p-4 ${accountType=="Student"?"bg-richblack-700 rounded-[25px]":""}`}
+        onClick={(e) => {e.preventDefault();
+          setaccountType("Student");
         }}>
           <p>student</p>
         </label>

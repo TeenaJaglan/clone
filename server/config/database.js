@@ -2,7 +2,13 @@ const mongoose = require("mongoose");
  require("dotenv").config();
 const dbconnection = function(){
     
-        mongoose.connect(process.env.DATABASE_URL).then(()=>{
+        mongoose.connect(process.env.DATABASE_URL
+            , {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+                serverSelectionTimeoutMS: 10000,
+              }
+        ).then(()=>{
          console.log("db connection successfully established .");
 
         }).catch((err)=>{

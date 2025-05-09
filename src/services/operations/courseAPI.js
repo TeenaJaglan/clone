@@ -104,3 +104,17 @@ export async function getFullCourseDetails(courseId,token){
         console.log("error in getfullcoursedetails",err);
     }
 }
+// export async function getAllmyCourses(){
+//     try{
+// const api = courses.GETMYCOURSE ;
+//  const res = await apiconnector("GET",api,null,{Authorization:`Bearer ${token}`});
+//  console.log("the response from connector is");
+//  console.log(res.data.data);
+ 
+//  return res.data.data;
+//     }
+//     catch(err){
+//         console.log("failed to fetch instructor  courses",err);
+//         toast.error("failed to load courses os the instructor")
+//     }
+// }

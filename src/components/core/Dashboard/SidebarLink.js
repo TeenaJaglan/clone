@@ -8,7 +8,7 @@
     const dispatch = useDispatch();
     const  matchRoute =(route)=>{
 if(location.pathname==="/dashboard/edit-course" && route==="/dashboard/add-course")return {};
-console.log("sidebar are",location.pathname,route,matchPath({path:route},location.pathname));
+//console.log("sidebar are",location.pathname,route,matchPath({path:route},location.pathname));
         return matchPath({path:route},location.pathname);
     }
    return (
